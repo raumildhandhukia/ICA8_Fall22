@@ -1,15 +1,18 @@
 import org.junit.jupiter.api.*;
 import java.io.*;
-
+import java.util.ArrayList;
+import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UrinalTest {
+    File fr = null;
+    ArrayList<String> data = null;
 
     Urinal u = new Urinal();
 
     @BeforeEach
     void setUp() {
-
+        fr = u.readDataFile();
     }
 
     @AfterEach
@@ -19,8 +22,14 @@ class UrinalTest {
 
     @Test
     public void ReadDataFIleTest(){
-        FileReader test2 = u.readDataFile();
-        Assertions.assertNotNull(test2);
+        fr = u.readDataFile();
+        Assertions.assertNotNull(fr);
+    }
+
+    @Test
+    public void readDataFromFile(){
+        data = u.readDataFromFile(fr);
+        Assertions.assertNotNull(data);
     }
 
 
