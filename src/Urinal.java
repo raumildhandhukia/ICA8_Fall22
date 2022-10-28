@@ -4,15 +4,28 @@ import java.util.ArrayList;
 
 public class Urinal {
 
-    public File readDataFile() {
+    public int goodString(String input){
+        int len = input.length();
+        for(int i = 0;i < len; i++){
+           if (input.charAt(i) != '1' && input.charAt(i) != '0'){
+               return -1;
+           }
+           if (input.charAt(i) == '1'){
+               if (i+1 < len && input.charAt(i+1) == '1'){
+                   return -1;
+               }
+           }
+        }
+        return 1;
+    }
 
+    public File readDataFile() {
         try {
             File file = new File("src/urinal.dat");
             return file;
         } catch (Exception e) {
             return null;
         }
-
     }
 
     public ArrayList<String> readDataFromFile(File file) {
@@ -30,5 +43,9 @@ public class Urinal {
         }
     }
 
-
+    public void createOutputFile(ArrayList<String> data){
+        for (String input : data) {
+            System.out.println(input);
+        }
+    }
 }
