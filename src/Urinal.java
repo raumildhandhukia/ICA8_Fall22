@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Assertions;
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -6,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Urinal {
+    File fr = null;
+    ArrayList<String> data = null;
 
     public boolean goodString(String input) {
         int len = input.length();
@@ -86,12 +90,21 @@ public class Urinal {
 
     }
 
-    public void createOutputFile(ArrayList<String> data) {
+    public boolean createOutputFile(ArrayList<String> data) throws IOException {
+        String fileName=getNextFileName();
+        File file = new File("src/" + fileName);
+        FileWriter writer = new FileWriter(file);
+        boolean hasWritten = false;
         for (String input : data) {
             if (goodString(input)) {
                 int count = getAvailableUrinals(input);
+                writer.write(String.valueOf(count));
+                writer.write("\r\n");
+                hasWritten = true;
             }
         }
+        writer.close();
+        return hasWritten;
     }
 
     public int getAvailableUrinals(String input) {
@@ -123,5 +136,6 @@ public class Urinal {
         return counter;
 
     }
+
 
 }

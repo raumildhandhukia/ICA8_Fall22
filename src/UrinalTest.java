@@ -61,8 +61,17 @@ class UrinalTest {
     @Test
     public void getNextFileName(){
         Assertions.assertTrue(u.getNextFileName() != null);
+        System.out.println("====Raumil Dhandhukia==== Test Five Executed ====");
     }
-
+    @Test
+    public void createOutputFile() throws IOException {
+        fr = u.readDataFile();
+        Assertions.assertNotNull(fr);
+        data = u.readDataFromFile(fr);
+        Assertions.assertNotNull(data);
+        Assertions.assertTrue(u.createOutputFile(data));
+        System.out.println("====Raumil Dhandhukia==== Test Six Executed ====");
+    }
 
 
 }
