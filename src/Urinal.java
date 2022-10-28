@@ -1,20 +1,26 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Urinal {
 
-    public boolean goodString(String input){
+    public boolean goodString(String input) {
         int len = input.length();
-        for(int i = 0;i < len; i++){
-           if (input.charAt(i) != '1' && input.charAt(i) != '0'){
-               return false;
-           }
-           if (input.charAt(i) == '1'){
-               if (i+1 < len && input.charAt(i+1) == '1'){
-                   return false;
-               }
-           }
+        if (len > 20) {
+            return false;
+        }
+        for (int i = 0; i < len; i++) {
+            if (input.charAt(i) != '1' && input.charAt(i) != '0') {
+                return false;
+            }
+            if (input.charAt(i) == '1') {
+                if (i + 1 < len && input.charAt(i + 1) == '1') {
+                    return false;
+                }
+            }
         }
         return true;
     }
@@ -43,32 +49,73 @@ public class Urinal {
         }
     }
 
-    public void createOutputFile(ArrayList<String> data){
+    public String getNextFileName() {
+        File folder = new File("src/");
+        File[] listOfFiles = folder.listFiles();
+        String fileName;
+        int number = 0;
+        int k;
+        int len = listOfFiles.length;
+        if (len > 0) {
+            for (int i = 0; i < len; i++) {
+                if (listOfFiles[i].isFile()) {
+                    fileName = listOfFiles[i].getName();
+                    int fileNameLength = fileName.length();
+                    if (fileNameLength > 8) {
+                        if (fileName.substring(0, 4).equals("rule") && fileName.substring(fileNameLength - 4, fileNameLength).equals(".txt")) {
+                            String FN = fileName.substring(0,fileNameLength - 4);
+                            String numberString = fileName.substring(0,fileNameLength - 4).split("rule",2)[1];
+                            try{
+                                k = Integer.parseInt(numberString);
+                                if (k > number){
+                                    number = k;
+                                }
+                            }
+                            catch (Exception e){
+                                System.out.println("Not a rule file.");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        number++;
+        String num = Integer.toString(number);
+//        System.out.println("rule" + num + ".txt");
+        return "rule" + num + ".txt";
+
+    }
+
+    public void createOutputFile(ArrayList<String> data) {
         for (String input : data) {
-            System.out.println(input);
+            if (goodString(input)) {
+                int count = getAvailableUrinals(input);
+            }
         }
     }
 
-    public int getAvailableUrinals(String input){
-        int counter=0;
+    public int getAvailableUrinals(String input) {
+        int counter = 0;
         int len = input.length();
         StringBuffer SB = new StringBuffer(input);
         {
-            for(int i=0;i<len;i++){
-                if (i==0){
-                if(SB.charAt(0)=='0' && SB.charAt(1)=='0'){
-                    counter++;
-                    SB.setCharAt(0, '1');
-                }} else if (i==len-1){
-                    if(SB.charAt(len-1)=='0' && SB.charAt(len-2)=='0'){
+            for (int i = 0; i < len; i++) {
+                if (i == 0) {
+                    if (SB.charAt(0) == '0' && SB.charAt(1) == '0') {
                         counter++;
-                        SB.setCharAt(len-1, '1');
+                        SB.setCharAt(0, '1');
                     }
-                }else{
-                if(SB.charAt(i-1)=='0' && SB.charAt(i+1)=='0'  && SB.charAt(i)=='0'){
-                    counter++;
-                    SB.setCharAt(i, '1');
-                }}
+                } else if (i == len - 1) {
+                    if (SB.charAt(len - 1) == '0' && SB.charAt(len - 2) == '0') {
+                        counter++;
+                        SB.setCharAt(len - 1, '1');
+                    }
+                } else {
+                    if (SB.charAt(i - 1) == '0' && SB.charAt(i + 1) == '0' && SB.charAt(i) == '0') {
+                        counter++;
+                        SB.setCharAt(i, '1');
+                    }
+                }
 
             }
 
