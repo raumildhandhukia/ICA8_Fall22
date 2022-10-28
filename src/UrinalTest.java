@@ -80,7 +80,18 @@ class UrinalTest {
         data = Urinal.readDataFromFile(fr);
         Assertions.assertNotNull(data);
         Assertions.assertFalse(Urinal.createOutputFile(data));
-        System.out.println("====Raumil Dhandhukia==== Test Six Executed ====");
+        System.out.println("====Raumil Dhandhukia==== Test Seven Executed ====");
+    }
+
+    @Test
+    public void FileNotExistsTest() throws IOException {
+        fr = Urinal.readDataFile("src/urinal_x.dat");
+        Assertions.assertNotNull(fr);
+        data = Urinal.readDataFromFile(fr);
+        Assertions.assertNull(data);
+        System.out.println("====Raumil Dhandhukia==== Test Eight Executed ====");
+
+
     }
 
 

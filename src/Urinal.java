@@ -98,6 +98,10 @@ public class Urinal {
                 writer.write(String.valueOf(count));
                 writer.write("\n");
                 hasWritten = true;
+            } else{
+                writer.write(String.valueOf(-1));
+                writer.write("\n");
+                hasWritten = true;
             }
         }
         writer.close();
