@@ -14,7 +14,7 @@ class UrinalTest {
 
     @BeforeEach
     void setUp() {
-        fr = u.readDataFile();
+        fr = Urinal.readDataFile("src/urinal.dat");
     }
 
     @AfterEach
@@ -24,52 +24,62 @@ class UrinalTest {
 
     @Test
     public void ReadDataFIleTest() {
-        fr = u.readDataFile();
+        fr = Urinal.readDataFile("src/urinal.dat");
         Assertions.assertNotNull(fr);
         System.out.println("====Raumil Dhandhukia==== Test One Executed ====");
     }
 
     @Test
     public void readDataFromFile() {
-        data = u.readDataFromFile(fr);
+        data = Urinal.readDataFromFile(fr);
         Assertions.assertNotNull(data);
         System.out.println("====Raumil Dhandhukia==== Test Two Executed ====");
     }
 
     @Test
     public void goodString() {
-        assertTrue(u.goodString("10001"));
-        assertTrue(u.goodString("1001"));
-        assertTrue(u.goodString("00000"));
-        assertTrue(u.goodString("0000"));
-        assertTrue(u.goodString("01000"));
-        assertFalse(u.goodString("011"));
-        assertFalse(u.goodString("NAN"));
+        assertTrue(Urinal.goodString("10001"));
+        assertTrue(Urinal.goodString("1001"));
+        assertTrue(Urinal.goodString("00000"));
+        assertTrue(Urinal.goodString("0000"));
+        assertTrue(Urinal.goodString("01000"));
+        assertFalse(Urinal.goodString("011"));
+        assertFalse(Urinal.goodString("NAN"));
         System.out.println("====Raumil Dhandhukia==== Test Three Executed ====");
     }
 
     @Test
     public void getAvailableUrinals(){
-        assertEquals(1, (u.getAvailableUrinals("10001")));
-        assertEquals(0, (u.getAvailableUrinals("10101")));
-        assertEquals(3, (u.getAvailableUrinals("00000")));
-        assertEquals(2, (u.getAvailableUrinals("10000")));
-        assertEquals(0, (u.getAvailableUrinals("010")));
-        assertEquals(1, (u.getAvailableUrinals("100010")));
+        assertEquals(1, (Urinal.getAvailableUrinals("10001")));
+        assertEquals(0, (Urinal.getAvailableUrinals("1001")));
+        assertEquals(3, (Urinal.getAvailableUrinals("00000")));
+        assertEquals(2, (Urinal.getAvailableUrinals("0000")));
+        assertEquals(1, (Urinal.getAvailableUrinals("01000")));
+        assertEquals(0, (Urinal.getAvailableUrinals("011")));
         System.out.println("====Raumil Dhandhukia==== Test Four Executed ====");
     }
     @Test
     public void getNextFileName(){
-        Assertions.assertTrue(u.getNextFileName() != null);
+        Assertions.assertTrue(Urinal.getNextFileName() != null);
         System.out.println("====Raumil Dhandhukia==== Test Five Executed ====");
     }
     @Test
     public void createOutputFile() throws IOException {
-        fr = u.readDataFile();
+        fr = Urinal.readDataFile("src/urinal.dat");
         Assertions.assertNotNull(fr);
-        data = u.readDataFromFile(fr);
+        data = Urinal.readDataFromFile(fr);
         Assertions.assertNotNull(data);
-        Assertions.assertTrue(u.createOutputFile(data));
+        Assertions.assertTrue(Urinal.createOutputFile(data));
+        System.out.println("====Raumil Dhandhukia==== Test Six Executed ====");
+    }
+
+    @Test
+    public void createOutputFileWithEmptyData() throws IOException {
+        fr = Urinal.readDataFile("src/urinal_empty.dat");
+        Assertions.assertNotNull(fr);
+        data = Urinal.readDataFromFile(fr);
+        Assertions.assertNotNull(data);
+        Assertions.assertFalse(Urinal.createOutputFile(data));
         System.out.println("====Raumil Dhandhukia==== Test Six Executed ====");
     }
 

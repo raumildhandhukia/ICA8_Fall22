@@ -1,17 +1,14 @@
-import org.junit.jupiter.api.Assertions;
-
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 
 public class Urinal {
     File fr = null;
     ArrayList<String> data = null;
 
-    public boolean goodString(String input) {
+    public static boolean goodString(String input) {
         int len = input.length();
         if (len > 20) {
             return false;
@@ -29,16 +26,16 @@ public class Urinal {
         return true;
     }
 
-    public File readDataFile() {
+    public static File readDataFile(String fileName) {
         try {
-            File file = new File("src/urinal.dat");
+            File file = new File(fileName);
             return file;
         } catch (Exception e) {
             return null;
         }
     }
 
-    public ArrayList<String> readDataFromFile(File file) {
+    public static ArrayList<String> readDataFromFile(File file) {
         int i;
         ArrayList<String> data = new ArrayList<String>();
         try {
@@ -53,7 +50,7 @@ public class Urinal {
         }
     }
 
-    public String getNextFileName() {
+    public static String getNextFileName() {
         File folder = new File("src/");
         File[] listOfFiles = folder.listFiles();
         String fileName;
@@ -90,7 +87,7 @@ public class Urinal {
 
     }
 
-    public boolean createOutputFile(ArrayList<String> data) throws IOException {
+    public static boolean createOutputFile(ArrayList<String> data) throws IOException {
         String fileName=getNextFileName();
         File file = new File("src/" + fileName);
         FileWriter writer = new FileWriter(file);
@@ -99,7 +96,7 @@ public class Urinal {
             if (goodString(input)) {
                 int count = getAvailableUrinals(input);
                 writer.write(String.valueOf(count));
-                writer.write("\r\n");
+                writer.write("\n");
                 hasWritten = true;
             }
         }
@@ -107,7 +104,7 @@ public class Urinal {
         return hasWritten;
     }
 
-    public int getAvailableUrinals(String input) {
+    public static int getAvailableUrinals(String input) {
         int counter = 0;
         int len = input.length();
         StringBuffer SB = new StringBuffer(input);
@@ -136,6 +133,8 @@ public class Urinal {
         return counter;
 
     }
+    public static void main(String[] args){
 
+    }
 
 }
