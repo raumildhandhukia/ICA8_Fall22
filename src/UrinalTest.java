@@ -30,7 +30,7 @@ class UrinalTest {
     }
 
     @Test
-    public void readDataFromFile() {
+    public void readDataFromFile() throws FileNotFoundException {
         data = Urinal.readDataFromFile(fr);
         Assertions.assertNotNull(data);
         System.out.println("====Raumil Dhandhukia==== Test Two Executed ====");
@@ -90,8 +90,14 @@ class UrinalTest {
         data = Urinal.readDataFromFile(fr);
         Assertions.assertNull(data);
         System.out.println("====Raumil Dhandhukia==== Test Eight Executed ====");
+    }
 
-
+    @Test
+    public void AlphabetsInInputStrings(){
+        assertFalse(Urinal.goodString("10AB01"));
+        assertFalse(Urinal.goodString("Hello"));
+        assertFalse(Urinal.goodString("James"));
+        System.out.println("====Raumil Dhandhukia==== Test Nine Executed ====");
     }
 
 

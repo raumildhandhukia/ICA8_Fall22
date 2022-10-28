@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Assertions;
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -5,8 +7,7 @@ import java.io.IOException;
 
 
 public class Urinal {
-    File fr = null;
-    ArrayList<String> data = null;
+
 
     public static boolean goodString(String input) {
         int len = input.length();
@@ -35,7 +36,7 @@ public class Urinal {
         }
     }
 
-    public static ArrayList<String> readDataFromFile(File file) {
+    public static ArrayList<String> readDataFromFile(File file) throws FileNotFoundException {
         int i;
         ArrayList<String> data = new ArrayList<String>();
         try {
@@ -44,8 +45,8 @@ public class Urinal {
                 data.add(sc.nextLine());
             }
             return data;
-        } catch (FileNotFoundException ex) {
-            System.out.println("File not found...");
+        } catch (Exception e){
+            System.out.println("Caught inside readDataFromFile");
             return null;
         }
     }
@@ -104,6 +105,9 @@ public class Urinal {
                 hasWritten = true;
             }
         }
+        if (hasWritten){
+            System.out.println("Output file has been written. File name is " + fileName);
+        }
         writer.close();
         return hasWritten;
     }
@@ -137,8 +141,14 @@ public class Urinal {
         return counter;
 
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
 
+        File fr = null;
+        ArrayList<String> data = null;
+        boolean statusWrite = false;
+        fr = Urinal.readDataFile("src/urinal.dat");
+        data = Urinal.readDataFromFile(fr);
+        statusWrite = Urinal.createOutputFile(data);
     }
 
 }
