@@ -38,14 +38,25 @@ class UrinalTest {
 
     @Test
     public void goodString() {
-        Assertions.assertEquals(1, u.goodString("10001"));
-        Assertions.assertEquals(1, u.goodString("1001"));
-        Assertions.assertEquals(1, u.goodString("00000"));
-        Assertions.assertEquals(1, u.goodString("0000"));
-        Assertions.assertEquals(1, u.goodString("01000"));
-        Assertions.assertEquals(-1, u.goodString("011"));
-        Assertions.assertEquals(-1, u.goodString("NAN"));
+        assertTrue(u.goodString("10001"));
+        assertTrue(u.goodString("1001"));
+        assertTrue(u.goodString("00000"));
+        assertTrue(u.goodString("0000"));
+        assertTrue(u.goodString("01000"));
+        assertFalse(u.goodString("011"));
+        assertFalse(u.goodString("NAN"));
         System.out.println("====Raumil Dhandhukia==== Test Three Executed ====");
+    }
+
+    @Test
+    public void getAvailableUrinals(){
+        assertEquals(1, (u.getAvailableUrinals("10001")));
+        assertEquals(0, (u.getAvailableUrinals("10101")));
+        assertEquals(3, (u.getAvailableUrinals("00000")));
+        assertEquals(2, (u.getAvailableUrinals("10000")));
+        assertEquals(0, (u.getAvailableUrinals("010")));
+        assertEquals(1, (u.getAvailableUrinals("100010")));
+        System.out.println("====Raumil Dhandhukia==== Test Four Executed ====");
     }
 
 
