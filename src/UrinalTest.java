@@ -58,6 +58,11 @@ class UrinalTest {
         assertEquals(1, (u.getAvailableUrinals("100010")));
         System.out.println("====Raumil Dhandhukia==== Test Four Executed ====");
     }
+    @Test
+    public void getNextFileName(){
+        Assertions.assertTrue(u.getNextFileName() != null);
+    }
+
 
 
 }
