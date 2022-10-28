@@ -1,4 +1,7 @@
-import org.junit.jupiter.api.Assertions;
+/**
+ * @author Raumil Dhandhukia, rdhandhu@asu.edu
+ * @date 10-27-2022
+ */
 
 import java.io.*;
 import java.util.Scanner;
@@ -142,7 +145,6 @@ public class Urinal {
 
     }
     public static void main(String[] args) throws IOException {
-
         File fr = null;
         ArrayList<String> data = null;
         boolean statusWrite = false;
